@@ -1,7 +1,30 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("Debug timeout issues") {
 
-    @play20.welcome(message)
+    <div class="row" ng-controller="timeoutCtrl">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Timeout</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="timeout">Timeout</label>
+                        <input type="number" class="form-control" id="timeout" placeholder="Enter timeout in ms" ng-model="timeout">
+                        <span class="help-block">Enter timeout in milliseconds</span>
+                    </div>
+                    <button class="btn btn-primary" ng-click="updateTimeout(timeout)">Update</button>
+                    <button class="btn btn-warning" ng-click="testTimeout()">Test</button>
 
+                    <div class="testresult" ng-hide="timeoutTestRes == '' ">
+                        <span>Result: {{timeoutTestRes}}</span>
+                        <a href="#" ng-hide="timeoutTestRes == 'Testing' " ng-click="clear()">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
