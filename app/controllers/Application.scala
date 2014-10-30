@@ -1,7 +1,7 @@
 package controllers
 
 import anorm._
-import play.api.Logger
+import play.api.{Play, Logger}
 import play.api.db.DB
 import play.api.libs.json.Json
 import play.api.mvc._
@@ -39,7 +39,12 @@ object Application extends Controller {
     val sleeptime = readTimeoutFromDb
     Logger.debug(s"Sleeping for $sleeptime ms")
     Thread.sleep(sleeptime)
-    Ok
+
+    val pic = Play.getExistingFile("public/images/charlie.jpg").get
+    Ok.sendFile(
+      content = pic,
+      fileName = _ => "charlie.jpg"
+    )
   }
 
   private def readTimeoutFromDb: Long = DB.withConnection { implicit c =>
