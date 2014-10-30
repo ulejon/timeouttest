@@ -12,11 +12,11 @@ object Application extends Controller {
   val rowParser = scalar[Long]
   val rsParser = scalar[Long].single
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def index = Action { implicit request =>
+    Ok(views.html.index())
   }
 
-  def getCurrentTimeout = Action {
+  def getCurrentTimeout = Action { implicit request =>
     val timeout: Long = readTimeoutFromDb
     Ok(Json.obj("timeout" -> timeout))
   }

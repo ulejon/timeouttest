@@ -1,27 +1,43 @@
-@(message: String)
+@()(implicit request: Request[play.api.mvc.AnyContent])
 
 @main("Debug timeout issues") {
-
-    <div class="row" ng-controller="timeoutCtrl">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Timeout</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="timeout">Timeout</label>
-                        <input type="number" class="form-control" id="timeout" placeholder="Enter timeout in ms" ng-model="timeout">
-                        <span class="help-block">Enter timeout in milliseconds</span>
+    <div ng-controller="timeoutCtrl">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Timeout</h3>
                     </div>
-                    <button class="btn btn-primary" ng-click="updateTimeout(timeout)">Update</button>
-                    <button class="btn btn-warning" ng-click="testTimeout()">Test</button>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="timeout">Timeout</label>
+                            <input type="number" class="form-control" id="timeout" placeholder="Enter timeout in ms" ng-model="timeout">
+                            <span class="help-block">Enter timeout in milliseconds</span>
+                        </div>
+                        <button class="btn btn-primary" ng-click="updateTimeout(timeout)">Update</button>
+                        <button class="btn btn-warning" ng-click="testTimeout()">Test</button>
 
-                    <div class="testresult" ng-hide="timeoutTestRes == '' ">
-                        <span>Result: {{timeoutTestRes}}</span>
-                        <a href="#" ng-hide="timeoutTestRes == 'Testing' " ng-click="clear()">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
+                        <div class="testresult" ng-hide="timeoutTestRes == '' ">
+                            <span>Result: {{timeoutTestRes}}</span>
+                            <a href="#" ng-hide="timeoutTestRes == 'Testing' " ng-click="clear()">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Routes</h3>
+                    </div>
+                    <div class="panel-body">
+                        <blockquote>
+                            <p>Use @routes.Application.performTimeoutTest().absoluteURL(true)</p>
+                        </blockquote>
                     </div>
                 </div>
             </div>
