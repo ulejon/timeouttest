@@ -6,7 +6,7 @@ import play.api.Play.current
 import play.api.db.DB
 import play.api.libs.json.Json
 import play.api.mvc._
-import play.api.{Logger, Play}
+import play.api.{Routes, Logger, Play}
 
 object Application extends Controller {
   val rowParser = scalar[Long]
@@ -47,5 +47,13 @@ object Application extends Controller {
   private def readTimeoutFromDb: Long = DB.withConnection { implicit c =>
     SQL("select timeout from Timeout")
       .as(scalar[Long].single)
+  }
+
+  def javascriptRoutes = Action { implicit request =>
+    Ok(
+      Routes.javascriptRouter("jsRoutes")(
+        controllers.routes.javascript.Application.performTimeoutTest
+      )
+    ).as("text/javascript")
   }
 }
