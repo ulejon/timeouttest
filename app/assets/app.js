@@ -1,4 +1,4 @@
-var timeoutApp = angular.module('timeoutApp', ['ngResource', 'ngRoute']);
+var timeoutApp = angular.module('timeoutApp', ['ngResource', 'ngRoute', 'ui.bootstrap']);
 
 timeoutApp.config(['$routeProvider',
     function($routeProvider) {
@@ -15,6 +15,13 @@ timeoutApp.config(['$routeProvider',
                 redirectTo: '/start'
             });
     }]);
+
+timeoutApp.controller('headerCtrl', function ($scope, $location) {
+    $scope.isActive = function (viewLocation) {
+        var active = (viewLocation === $location.path());
+        return active;
+    };
+});
 
 timeoutApp.controller('timeoutCtrl', function ($scope, $resource) {
     var Timeout = $resource('/timeout', {}, {});
@@ -51,7 +58,10 @@ timeoutApp.controller('timeoutCtrl', function ($scope, $resource) {
         $scope.timeoutTestRes = null;
     };
 
-    $scope.testUrl = jsRoutes.controllers.Application.performTimeoutTest().url;
+    $scope.testUrl = function () {
+        var route = jsRoutes.controllers.Application.performTimeoutTest();
+        return route.absoluteURL();
+    };
 });
 
 timeoutApp.controller('helloCtrl', function ($scope, $resource) {
