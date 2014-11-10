@@ -40,7 +40,7 @@ object Application extends Controller {
     Logger.debug(s"Sleeping for $sleeptime ms")
     Thread.sleep(sleeptime)
 
-    val resourceData = Play.getExistingFile("conf/iTerm2_v2_0.zip").get
+    val resourceData = Play.getExistingFile("conf/charlie.jpg").get
     Ok.sendFile(resourceData)
   }
 
